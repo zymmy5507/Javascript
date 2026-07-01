@@ -44,3 +44,11 @@ console.log('Result from IIFE:', result); // 25
 // 6. Modern alternatives
 // With ES6 modules and block scope, IIFEs are less common, but they are still useful
 // for immediately running code and isolating temporary variables.
+
+
+( (val) => {
+    // This is an arrow function IIFE
+    let arrowMessage = 'Hello from Arrow IIFE';
+    console.log(arrowMessage);
+    console.log('Value passed to IIFE:', val);
+})()

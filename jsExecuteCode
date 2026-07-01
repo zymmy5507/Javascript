@@ -1,0 +1,3 @@
+How js execute the code ?
+
+JavaScript executes code by first creating a Global Execution Context. This execution context has two phases: the Memory Creation Phase and the Code Execution Phase. During the Memory Creation Phase, JavaScript scans the code, allocates memory to variables by initializing var variables with undefined, and stores function declarations completely in memory. In the Code Execution Phase, JavaScript executes the code line by line, assigns actual values to variables, and runs functions. Every time a function is invoked, a new Function Execution Context is created, pushed onto the Call Stack, executed, and then removed after completion. This process continues until the entire program finishes executing.

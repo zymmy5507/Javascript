@@ -1,0 +1,291 @@
+2 min revision
+
+DOM
+│
+├── Select Elements
+│      ├── getElementById()
+│      ├── getElementsByClassName()
+│      ├── getElementsByTagName()
+│      ├── querySelector()
+│      └── querySelectorAll()
+│
+├── Collections
+│      ├── HTMLCollection (Live)
+│      └── NodeList (Static)
+│
+├── Create
+│      ├── createElement()
+│      ├── append()
+│      ├── appendChild()
+│      └── insertBefore()
+│
+├── Edit
+│      ├── innerHTML
+│      ├── innerText
+│      ├── textContent
+│      ├── classList
+│      ├── style
+│      └── setAttribute()
+│
+├── Remove
+│      ├── remove()
+│      └── removeChild()
+│
+└── Traverse
+       ├── parentElement
+       ├── children
+       ├── firstElementChild
+       ├── lastElementChild
+       ├── nextElementSibling
+       └── previousElementSibling
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 
+ What is DOM?
+
+ The DOM (Document Object Model) is a tree-like object representation of an HTML document created by the browser.
+
+ It allows JavaScript to access, read, modify, add, and delete HTML elements dynamically after the webpage has loaded.
+
+ Why do we need DOM?
+
+ HTML is static. Once the browser displays the page, HTML alone cannot change its content.
+
+ To make a webpage interactive (change text, colors, images, etc.), JavaScript needs a way to access HTML elements.
+
+ The browser solves this by converting every HTML element into a JavaScript object. This collection of objects is called the DOM.
+
+#DOM tree
+
+<body>
+
+<div>
+
+<h1>Hello</h1>
+
+<p>World</p>
+
+</div>
+
+</body>
+
+ # DOM
+
+ Document
+    │
+   html
+    │
+   body
+    │
+   div
+  ┌─┴──┐
+  │    │
+ h1    p
+
+ # DOM Selectors
+
+Selectors are used to access HTML elements.
+
+getElementById()
+
+Returns one element
+
+const title = document.getElementById("title");
+<h1 id="title">Hello</h1>
+getElementsByClassName()
+
+Returns HTMLCollection
+
+const boxes = document.getElementsByClassName("box");
+<div class="box"></div>
+<div class="box"></div>
+getElementsByTagName()
+
+Returns HTMLCollection
+
+const paragraphs = document.getElementsByTagName("p");
+querySelector()
+
+Returns first matching element
+
+document.querySelector(".box");
+
+document.querySelector("#title");
+
+document.querySelector("p");
+
+Works with CSS selectors.
+
+querySelectorAll()
+
+Returns NodeList
+
+document.querySelectorAll(".box");
+
+Returns every matching element.
+
+DOM Selector Summary
+Method	Returns
+getElementById()	Single Element
+getElementsByClassName()	HTMLCollection
+getElementsByTagName()	HTMLCollection
+querySelector()	First Matching Element
+querySelectorAll()	NodeList
+
+
++++++++++++++++++++++++++++++++
+
+Creating New Elements
+
+Create
+
+const div = document.createElement("div");
+
+Add text
+
+div.innerText = "Hello";
+
+Add class
+
+div.className = "box";
+
+Add id
+
+div.id = "container";
+
+Add attribute
+
+div.setAttribute("title", "Demo");
+Adding Element to DOM
+append()
+parent.append(child);
+appendChild()
+parent.appendChild(child);
+
+Example
+
+const p = document.createElement("p");
+
+p.innerText = "Hello";
+
+document.body.appendChild(p);
+append() vs appendChild()
+append()	appendChild()
+Multiple elements	One element
+Can append text	Element only
+Modern	Older
+insertBefore()
+parent.insertBefore(newNode, existingNode);
+
+Example
+
+ul.insertBefore(li, ul.firstChild);
+Editing Elements
+innerText
+
+Only visible text
+
+heading.innerText = "Hello";
+textContent
+
+Returns all text
+
+Hidden text included
+
+heading.textContent
+innerHTML
+
+Reads/Writes HTML
+
+div.innerHTML = "<h1>Hello</h1>";
+
+Creates actual HTML.
+
+Difference
+Property	Includes HTML	Hidden Text
+innerText	❌	❌
+textContent	❌	✅
+innerHTML	✅	✅
+Editing Attributes
+img.src = "image.png";
+
+input.placeholder = "Enter Name";
+
+link.href = "...";
+
+Using setAttribute()
+
+element.setAttribute("id","main");
+
+Get Attribute
+
+element.getAttribute("id");
+
+Remove Attribute
+
+element.removeAttribute("id");
+Editing Styles
+
+Inline CSS
+
+div.style.color = "red";
+
+div.style.backgroundColor = "black";
+
+div.style.fontSize = "20px";
+Working with Classes
+
+Add
+
+element.classList.add("active");
+
+Remove
+
+element.classList.remove("active");
+
+Toggle
+
+element.classList.toggle("active");
+
+Contains
+
+element.classList.contains("active");
+
+Replace
+
+element.classList.replace("old","new");
+Removing Elements
+
+Modern
+
+element.remove();
+
+Older
+
+parent.removeChild(child);
+Traversing DOM
+
+Parent
+
+element.parentElement
+
+Children
+
+element.children
+
+First Child
+
+element.firstElementChild
+
+Last Child
+
+element.lastElementChild
+
+Next Sibling
+
+element.nextElementSibling
+
+Previous Sibling
+
+element.previousElementSibling
+

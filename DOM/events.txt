@@ -1,0 +1,711 @@
+Events in JavaScript
+First, forget JavaScript.
+
+Imagine you're using your phone.
+
+What actions do you perform?
+
+Click a button
+Double click
+Scroll
+Press a key
+Hover over something
+Submit a form
+Resize the window
+
+These are all actions.
+
+In JavaScript, we call these Events.
+
+What is an Event?
+
+An event is any action performed by the user or the browser.
+
+Examples:
+
+Click
+
+Double Click
+
+Hover
+
+Typing
+
+Scrolling
+
+Submitting Form
+
+Dragging
+
+Resizing Window
+
+Loading Page
+
+Whenever one of these happens, JavaScript can respond.
+
+Real Life Example
+
+Imagine your house has a doorbell.
+
+Door Bell
+     │
+     ▼
+Someone Presses It
+     │
+     ▼
+You Open the Door
+
+The doorbell itself does nothing.
+
+It only tells you
+
+"Someone pressed me."
+
+Similarly,
+
+Button
+   │
+   ▼
+User Clicks
+   │
+   ▼
+JavaScript Executes Code
+HTML
+<button id="btn">Click Me</button>
+
+Nothing happens.
+
+Now JavaScript
+
+const btn = document.getElementById("btn");
+
+btn.addEventListener("click", function () {
+    console.log("Button Clicked");
+});
+
+Now
+
+User Clicks
+
+↓
+
+click Event Happens
+
+↓
+
+JavaScript Runs Function
+
+Output
+
+Button Clicked
+Event = Trigger
+
+Think of it this way
+
+User Action
+
+↓
+
+Event Triggered
+
+↓
+
+JavaScript Function Executes
+Why do we need Events?
+
+Without events,
+
+Imagine YouTube.
+
+Click Play
+
+Nothing happens.
+
+Search
+
+Nothing happens.
+
+Volume
+
+Nothing happens.
+
+Everything would be static.
+
+Events make webpages interactive.
+
+Event Listener
+
+You'll hear this term everywhere.
+
+addEventListener()
+
+Why is it called a listener?
+
+Because JavaScript is literally listening.
+
+Think of a security guard.
+
+Guard
+
+Listening...
+
+Listening...
+
+Listening...
+
+Someone Comes
+
+↓
+
+Action
+
+Similarly,
+
+Button
+
+Listening...
+
+Listening...
+
+Listening...
+
+User Clicks
+
+↓
+
+Run Function
+Syntax
+element.addEventListener(event, callback);
+
+Example
+
+button.addEventListener("click", function () {
+
+});
+
+Break it down.
+
+element
+
+Which element?
+
+Button
+event
+
+What should JavaScript listen for?
+
+click
+
+mouseover
+
+keydown
+
+submit
+callback
+
+What should happen?
+
+function(){
+
+}
+
+Complete Example
+
+button.addEventListener("click", function(){
+
+    alert("Hello");
+
+});
+
+Flow
+
+User Click
+
+↓
+
+click Event
+
+↓
+
+Callback Function
+
+↓
+
+Alert Opens
+Common Events
+Mouse Events
+click
+
+dblclick
+
+mouseenter
+
+mouseleave
+
+mousemove
+
+contextmenu
+Keyboard Events
+keydown
+
+keyup
+
+keypress (deprecated)
+Form Events
+submit
+
+change
+
+focus
+
+blur
+
+input
+Window Events
+load
+
+resize
+
+scroll
+What is Callback Function?
+
+Interviewers ask this a lot.
+
+Example
+
+button.addEventListener("click", sayHello);
+
+function sayHello(){
+
+    console.log("Hello");
+
+}
+
+Notice
+
+We didn't write
+
+sayHello();
+
+Why?
+
+Because JavaScript should call it later.
+
+Not now.
+
+The function is passed as a reference.
+
+When click happens,
+
+JavaScript executes it.
+
+That's why it's called a callback.
+
+Event Object
+
+This is another favorite interview question.
+
+Example
+
+button.addEventListener("click", function(event){
+
+    console.log(event);
+
+});
+
+What is event?
+
+JavaScript automatically creates an object.
+
+Inside it is lots of information.
+
+Which button?
+
+Mouse Position?
+
+Target Element?
+
+Event Type?
+
+Current Target?
+
+Time Stamp?
+
+Example
+
+button.addEventListener("click", function(e){
+
+    console.log(e.target);
+
+});
+
+Output
+
+<button>
+
+Example
+
+console.log(e.type);
+
+Output
+
+click
+Most Useful Event Properties
+e.target
+
+e.type
+
+e.clientX
+
+e.clientY
+
+e.key
+
+e.preventDefault()
+
+e.stopPropagation()
+
+Don't worry about the last two yet—we'll cover them shortly.
+
+Event Flow (Most Important Interview Topic)
+
+Imagine this HTML:
+
+<div>
+
+<button>
+
+Click
+
+</button>
+
+</div>
+
+Tree
+
+Document
+
+↓
+
+Body
+
+↓
+
+Div
+
+↓
+
+Button
+
+Suppose you click the button.
+
+Question:
+
+Should JavaScript notify
+
+Button only?
+
+or
+
+Button
+
+↓
+
+Div
+
+↓
+
+Body
+
+↓
+
+Document
+
+The answer leads us to Event Bubbling and Event Capturing.
+
+Event Bubbling
+
+Imagine a child shouting in a room.
+
+Child
+
+↓
+
+Father
+
+↓
+
+Grandfather
+
+↓
+
+Whole House
+
+The sound moves upward.
+
+Similarly,
+
+Button
+
+↓
+
+Div
+
+↓
+
+Body
+
+↓
+
+Document
+
+When you click a button,
+
+the event first happens on the button, then bubbles up through its ancestors.
+
+Example
+
+<div id="parent">
+
+<button id="child">
+
+Click
+
+</button>
+
+</div>
+parent.addEventListener("click", function(){
+
+    console.log("Parent");
+
+});
+
+child.addEventListener("click", function(){
+
+    console.log("Child");
+
+});
+
+Click Button
+
+Output
+
+Child
+
+Parent
+
+Why?
+
+Because of bubbling.
+
+Event Capturing
+
+Capturing is the opposite.
+
+Document
+
+↓
+
+Body
+
+↓
+
+Div
+
+↓
+
+Button
+
+Top to Bottom.
+
+Normally,
+
+JavaScript uses bubbling.
+
+Capturing happens only if you enable it.
+
+parent.addEventListener("click", function(){
+
+}, true);
+
+The third argument (true) tells the browser to use the capturing phase.
+
+stopPropagation()
+
+Suppose you only want
+
+Child
+
+not
+
+Parent
+
+Then
+
+child.addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+});
+
+Now
+
+Output
+
+Child
+
+Parent won't receive the event.
+
+preventDefault()
+
+Some HTML elements have default behavior.
+
+Example
+
+<a href="https://google.com">
+
+Google
+
+</a>
+
+Click
+
+↓
+
+Browser opens Google.
+
+Suppose you don't want that.
+
+link.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+});
+
+Now
+
+Google won't open.
+
+Same for forms.
+
+Event Delegation (VERY Important)
+
+Interviewers love this.
+
+Imagine
+
+100 buttons.
+
+Should we write
+
+button1.addEventListener()
+
+button2.addEventListener()
+
+button3.addEventListener()
+
+100 times?
+
+No.
+
+Instead,
+
+add one listener to the parent.
+
+Parent
+
+↓
+
+100 Buttons
+
+Example
+
+parent.addEventListener("click", function(e){
+
+    console.log(e.target);
+
+});
+
+When any child is clicked,
+
+the parent receives the bubbled event and can identify the clicked child using e.target.
+
+Benefits:
+
+Better performance
+Less memory usage
+Works with dynamically added elements
+Complete Flow
+User Clicks
+
+↓
+
+Browser Creates Event Object
+
+↓
+
+Target Element Receives Event
+
+↓
+
+Callback Executes
+
+↓
+
+Event Bubbles Up
+
+↓
+
+Parent
+
+↓
+
+Body
+
+↓
+
+Document
+Interview Answer
+What is an Event?
+
+An event is an action performed by the user or the browser, such as a click, key press, scroll, or form submission. JavaScript listens for these events using addEventListener() and executes a callback function when the event occurs.
+
+What is Event Bubbling?
+
+Event Bubbling is the default behavior in JavaScript where an event starts from the target element and propagates upward through its parent elements up to the document.
+
+What is Event Capturing?
+
+Event Capturing is the opposite of bubbling. The event travels from the document down to the target element. It can be enabled by passing true as the third argument to addEventListener().
+
+What is Event Delegation?
+
+Event Delegation is a technique where a single event listener is attached to a parent element to handle events for its child elements using event bubbling and event.target. It improves performance and also works for dynamically created elements.
+
+⭐ Revision Flow (Remember This)
+Events
+│
+├── What?
+│      └── User/Browser Action
+│
+├── addEventListener()
+│      ├── Element
+│      ├── Event Type
+│      └── Callback
+│
+├── Event Object
+│      ├── target
+│      ├── type
+│      ├── clientX / clientY
+│      ├── preventDefault()
+│      └── stopPropagation()
+│
+├── Event Flow
+│      ├── Capturing (Top → Bottom)
+│      ├── Target
+│      └── Bubbling (Bottom → Top) ⭐ Default
+│
+└── Event Delegation
+       ├── One Parent Listener
+       ├── Uses Bubbling
+       └── event.target
